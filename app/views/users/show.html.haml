@@ -1,0 +1,26 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @user.name
+
+%p
+  %b Transactions
+
+  %p
+    - @user.transactions.each do |t|
+      %p= "#{User.find(t.to).name}, #{t.amount} cents"
+
+  = form_for ([@user, @user.transactions.build]) do |f|
+    %p
+      = f.label :to
+      = f.select :to, User.all.map { |u| [u.name, u.id]}
+    %p
+      = f.label :amount
+      = f.number_field :amount
+    = f.submit
+
+%p
+  = link_to 'Edit', edit_user_path(@user)
+  \|
+  = link_to 'Back', users_path
