@@ -3,7 +3,6 @@ class TransactionsController < ApplicationController
     @user = User.find(params[:user_id])
     to = User.find(transaction_params[:to])
     @transaction = @user.transactions.create(transaction_params)
-    # @transaction = @user.transactions.create(to: User.find(transaction_params[:to]), amount: transaction_params[:amount])
     redirect_to user_path(@user)
   end
 

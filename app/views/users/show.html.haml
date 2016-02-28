@@ -8,17 +8,25 @@
   %b Transactions
 
   %p
+    %b To
     - @user.transactions.each do |t|
       %p= "#{User.find(t.to).name}, #{t.amount} cents"
 
-  = form_for ([@user, @user.transactions.build]) do |f|
-    %p
-      = f.label :to
-      = f.select :to, User.all.map { |u| [u.name, u.id]}
-    %p
-      = f.label :amount
-      = f.number_field :amount
-    = f.submit
+  %p
+    %b From
+    - Transaction.where(to: @user.id).each do |t|
+      %p= User.find(t.user_id).name
+
+  %p
+    %b New Transactions
+    = form_for ([@user, @user.transactions.build]) do |f|
+      %p
+        = f.label :to
+        = f.select :to, User.where.not(id: @user.id).map { |u| [u.name, u.id] }
+      %p
+        = f.label :amount
+        = f.number_field :amount
+      = f.submit
 
 %p
   = link_to 'Edit', edit_user_path(@user)
