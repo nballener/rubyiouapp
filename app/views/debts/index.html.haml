@@ -1,0 +1,25 @@
+%h1 Listing debts
+
+%table
+  %thead
+    %tr
+      %th Amount
+      %th User to
+      %th User from
+      %th
+      %th
+      %th
+
+  %tbody
+    - @debts.each do |debt|
+      %tr
+        %td= debt.amount
+        %td= debt.user_to
+        %td= debt.user_from
+        %td= link_to 'Show', debt
+        %td= link_to 'Edit', edit_debt_path(debt)
+        %td= link_to 'Destroy', debt, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Debt', new_debt_path

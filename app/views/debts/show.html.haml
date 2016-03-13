@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Amount:
+  = @debt.amount
+%p
+  %b User to:
+  = @debt.user_to
+%p
+  %b User from:
+  = @debt.user_from
+
+= link_to 'Edit', edit_debt_path(@debt)
+\|
+= link_to 'Back', debts_path

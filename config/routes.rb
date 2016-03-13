@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
 
 
+  resources :debts
   resources :users do
     resources :transactions
   end
